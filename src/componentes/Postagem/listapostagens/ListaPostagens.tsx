@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import CardPostagens from "../Postagem/CardPostagens";
+import CardPostagens from "../cardpostagens/CardPostagens";
 import { useState, useContext, useEffect } from "react";
-import { AuthContext } from "../../contexts/AuthContext";
-import Postagem from "../../models/Postagem";
-import { buscar } from "../../services/Service";
+import { AuthContext } from "../../../contexts/AuthContext";
+import Postagem from "../../../models/Postagem";
+import { buscar } from "../../../services/Service";
 import { DNA } from "react-loader-spinner";
 
 function ListaPostagens() {
