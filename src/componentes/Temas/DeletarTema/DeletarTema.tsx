@@ -2,7 +2,6 @@ import { useState, useContext, useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { AuthContext } from "../../../contexts/AuthContext"
 import Tema from "../../../models/Tema"
-import { buscar, deletar } from "../../../services/Service"
 import { RotatingLines } from "react-loader-spinner"
 import { ToastAlerta } from "../../../utils/ToastAlerta"
 
@@ -18,57 +17,7 @@ function DeletarTema() {
 
     const { id } = useParams<{ id: string }>()
 
-    async function buscarPorId(id: string) {
-        try {
-            await buscar(`/temas/${id}`, setTema, {
-                headers: {
-                    'Authorization': token
-                }
-            })
-        } catch (error: any) {
-            if (error.toString().includes('403')) {
-                handleLogout()
-            }
-        }
-    }
-
-    useEffect(() => {
-        if (token === '') {
-            ToastAlerta('Você precisa estar logado', 'info')
-            navigate('/')
-        }
-    }, [token])
-
-    useEffect(() => {
-        if (id !== undefined) {
-            buscarPorId(id)
-        }
-    }, [id])
-
-    async function deletarTema() {
-        setIsLoading(true)
-
-        try {
-            await deletar(`/temas/${id}`, {
-                headers: {
-                    'Authorization': token
-                }
-            })
-
-            ToastAlerta('Tema apagado com sucesso', 'sucesso')
-
-        } catch (error: any) {
-            if (error.toString().includes('403')) {
-                handleLogout()
-            }else {
-                ToastAlerta('Erro ao deletar o tema.', 'erro')
-            }
-        }
-
-        setIsLoading(false)
-        retornar()
-    }
-
+ 
     function retornar() {
         navigate("/temas")
     }
@@ -93,7 +42,7 @@ function DeletarTema() {
                     <button 
                         className='w-full text-slate-100 bg-indigo-400 
                                    hover:bg-indigo-600 flex items-center justify-center'
-                                   onClick={deletarTema}>
+                                  >
                         {isLoading ?
                             <RotatingLines
                                 strokeColor="white"

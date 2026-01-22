@@ -3,7 +3,6 @@ import CardPostagens from "../cardpostagens/CardPostagens";
 import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
 import Postagem from "../../../models/Postagem";
-import { buscar } from "../../../services/Service";
 import { DNA } from "react-loader-spinner";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
 
@@ -16,31 +15,9 @@ function ListaPostagens() {
     const { usuario, handleLogout } = useContext(AuthContext);
     const token = usuario.token;
 
-    async function buscarPostagens() {
-        try {
-            await buscar('/postagens', setPostagens, {
-                headers: {
-                    Authorization: token,
-                },
-            })
+   
 
-        } catch (error: any) {
-            if (error.toString().includes('403')) {
-                handleLogout()
-            }
-        }
-    }
-
-    useEffect(() => {
-        if (token === '') {
-            ToastAlerta('Você precisa estar logado', 'info')
-            navigate('/');
-        }
-    }, [token])
-
-    useEffect(() => {
-        buscarPostagens()
-    }, [postagens.length])
+  
 
     return (
         <>

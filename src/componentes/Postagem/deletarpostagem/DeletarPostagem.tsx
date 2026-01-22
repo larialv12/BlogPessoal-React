@@ -2,7 +2,6 @@ import { useState, useContext, useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { AuthContext } from "../../../contexts/AuthContext"
 import Postagem from "../../../models/Postagem"
-import { buscar, deletar } from "../../../services/Service"
 import { RotatingLines } from "react-loader-spinner"
 import { ToastAlerta } from "../../../utils/ToastAlerta"
 
@@ -18,56 +17,8 @@ function DeletarPostagem() {
     const { usuario, handleLogout } = useContext(AuthContext)
     const token = usuario.token
 
-    async function buscarPorId(id: string) {
-        try {
-            await buscar(`/postagens/${id}`, setPostagem, {
-                headers: {
-                    'Authorization': token
-                }
-            })
-        } catch (error: any) {
-            if (error.toString().includes('403')) {
-                handleLogout()
-            }
-        }
-    }
-
-    useEffect(() => {
-        if (token === '') {
-            ToastAlerta('Você precisa estar logado', 'info')
-            navigate('/')
-        }
-    }, [token])
-
-    useEffect(() => {
-        if (id !== undefined) {
-            buscarPorId(id)
-        }
-    }, [id])
-
-    async function deletarPostagem() {
-        setIsLoading(true)
-
-        try {
-            await deletar(`/postagens/${id}`, {
-                headers: {
-                    'Authorization': token
-                }
-            })
-
-            ToastAlerta('Postagem apagada com sucesso', 'sucesso')
-
-        } catch (error: any) {
-            if (error.toString().includes('403')) {
-                handleLogout()
-            }else {
-                ToastAlerta('Erro ao deletar a postagem.', 'erro')
-            }
-        }
-
-        setIsLoading(false)
-        retornar()
-    }
+    
+    
 
     function retornar() {
         navigate("/postagens")
@@ -99,7 +50,7 @@ function DeletarPostagem() {
                     <button 
                         className='w-full text-slate-100 bg-indigo-400 
                         hover:bg-indigo-600 flex items-center justify-center'
-                        onClick={deletarPostagem}>
+                      >
                         
                         {isLoading ?
                             <RotatingLines

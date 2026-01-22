@@ -14,7 +14,7 @@ function Footer() {
 
         component = (
 
-            <div className="flex justify-center bg-indigo-900 text-white">
+            <div className="flex justify-center bg-black/60 text-white">
                 <div className="container flex flex-col items-center py-4">
                     <p className='text-xl font-bold'>
                         Larissa Alves Siqueira | Copyright: {data}

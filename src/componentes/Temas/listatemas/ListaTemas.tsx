@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
 import Tema from "../../../models/Tema";
 import CardTemas from "../CardTemas/CardTemas";
-import { buscar } from "../../../services/Service";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 function ListaTemas() {
@@ -16,28 +15,6 @@ function ListaTemas() {
     const { usuario, handleLogout } = useContext(AuthContext)
     const token = usuario.token
 
-    async function buscarTemas() {
-        try {
-            await buscar('/temas', setTemas, {
-                headers: { Authorization: token }
-            })
-        } catch (error: any) {
-            if (error.toString().includes('403')) {
-                handleLogout()
-            }
-        }
-    }
-
-    useEffect(() => {
-        if (token === '') {
-            ToastAlerta('Você precisa estar logado!', 'info')
-            navigate('/')
-        }
-    }, [token])
-
-    useEffect(() => {
-        buscarTemas()    
-    }, [temas.length])
     
     return (
         <>

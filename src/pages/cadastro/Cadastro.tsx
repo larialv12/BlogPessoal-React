@@ -1,7 +1,6 @@
 import { useState, useEffect, ChangeEvent, FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Usuario from '../../models/Usuario'
-import { cadastrarUsuario } from '../../services/Service'
 import './Cadastro.css'
 import { RotatingLines } from 'react-loader-spinner'
 import { ToastAlerta } from '../../utils/ToastAlerta'
@@ -51,19 +50,7 @@ function Cadastro() {
 
       setIsLoading(true)
 
-      try{
-        await cadastrarUsuario(`/usuarios/cadastrar`, usuario, setUsuario)
-        ToastAlerta('Usuário cadastrado com sucesso!', 'sucesso')
-      }catch(error){
-        ToastAlerta('Erro ao cadastrar o usuário!','erro')
-      }
-    }else{
-      ToastAlerta('Dados do usuário inconsistentes! Verifique as informações do cadastro.', 'erro')
-      setUsuario({...usuario, senha: ''})
-      setConfirmaSenha('')
-    }
-
-    setIsLoading(false)
+      
   }
   
   return (
@@ -166,5 +153,5 @@ function Cadastro() {
     </>
   )
 }
-
+}
 export default Cadastro

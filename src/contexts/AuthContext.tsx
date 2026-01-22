@@ -1,60 +1,48 @@
-import { createContext, ReactNode, useState } from "react"
-
-import UsuarioLogin from "../models/UsuarioLogin"
-import { login } from "../services/Service"
-import { ToastAlerta } from "../utils/ToastAlerta"
+import { createContext, ReactNode, useState } from "react";
+import UsuarioLogin from "../models/UsuarioLogin";
 
 interface AuthContextProps {
-    usuario: UsuarioLogin
-    handleLogout(): void
-    handleLogin(usuario: UsuarioLogin): Promise<void>
-    isLoading: boolean
+  usuario: UsuarioLogin;
+  handleLogout(): void;
+  handleLogin(usuario: UsuarioLogin): Promise<void>;
+  isLoading: boolean;
 }
 
 interface AuthProviderProps {
-    children: ReactNode
+  children: ReactNode;
 }
 
-export const AuthContext = createContext({} as AuthContextProps)
+export const AuthContext = createContext({} as AuthContextProps);
 
 export function AuthProvider({ children }: AuthProviderProps) {
 
-    const [usuario, setUsuario] = useState<UsuarioLogin>({
-        id: 0,
-        nome: "",
-        usuario: "",
-        senha: "",
-        foto: "",
-        token: ""
-    })
+  // ?? Usu·rio fake (simula login)
+  const [usuario, setUsuario] = useState<UsuarioLogin>({
+    id: 1,
+    nome: "Visitante",
+    usuario: "visitante",
+    senha: "",
+    foto: "",
+    token: "fake-token"
+  });
 
-    const [isLoading, setIsLoading] = useState(false)
+  const [isLoading] = useState(false);
 
-    async function handleLogin(usuarioLogin: UsuarioLogin) {
-        setIsLoading(true)
-        try {
-            await login(`/usuarios/logar`, usuarioLogin, setUsuario)
-            ToastAlerta("Usu√°rio foi autenticado com sucesso!", "sucesso")
-        } catch (error) {
-            ToastAlerta("Os dados do Usu√°rio est√£o inconsistentes!", "erro")
-        }
-        setIsLoading(false)
-    }
+  async function handleLogin() {
+    // login desativado (backend removido)
+    return;
+  }
 
-    function handleLogout() {
-        setUsuario({
-            id: 0,
-            nome: "",
-            usuario: "",
-            senha: "",
-            foto: "",
-            token: ""
-        })
-    }
+  function handleLogout() {
+    // opcional: manter usu·rio logado
+    return;
+  }
 
-    return (
-        <AuthContext.Provider value={{ usuario, handleLogin, handleLogout, isLoading }}>
-            {children}
-        </AuthContext.Provider>
-    )
+  return (
+    <AuthContext.Provider
+      value={{ usuario, handleLogin, handleLogout, isLoading }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 }
