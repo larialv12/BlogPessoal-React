@@ -6,7 +6,7 @@ function Home() {
   return (
     <>
       <main
-        className="w-full  h-150 bg-cover bg-center text-white
+        className="w-full  h-120 bg-cover bg-center text-white
                    flex flex-col items-center justify-center"
         style={{ backgroundImage: `url(${banner})` }}
       >

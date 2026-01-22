@@ -5,45 +5,17 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import Postagem from "../../../models/Postagem";
 import { DNA } from "react-loader-spinner";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
+import { postagensMock } from "../../../mocks/postagensMock"
 
 function ListaPostagens() {
-
-    const navigate = useNavigate();
-
-    const [postagens, setPostagens] = useState<Postagem[]>([]);
-
-    const { usuario, handleLogout } = useContext(AuthContext);
-    const token = usuario.token;
-
-   
-
-  
-
-    return (
-        <>
-            {postagens.length === 0 && (
-                <DNA
-                    visible={true}
-                    height="200"
-                    width="200"
-                    ariaLabel="dna-loading"
-                    wrapperStyle={{}}
-                    wrapperClass="dna-wrapper mx-auto"
-                />
-            )}
-            <div className="flex justify-center w-full my-4">
-                <div className="container flex flex-col mx-2">
-                    <div className='container mx-auto my-4 
-                        grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'
-                    >
-                        {postagens.map((postagem) => (
-                            <CardPostagens key={postagem.id} postagem={postagem} />
-                        ))}
-                    </div>
-                </div>
-            </div>
-        </>
-    );
+  return (
+    <section className="container mx-auto my-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {postagensMock.map(postagem => (
+        <CardPostagens key={postagem.id} postagem={postagem} />
+      ))}
+    </section>
+  )
 }
+
 
 export default ListaPostagens;
