@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom"
 
 import { AuthContext } from "../../contexts/AuthContext"
 import { ToastAlerta } from "../../utils/ToastAlerta"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
 
 function Perfil() {
 	const navigate = useNavigate()
@@ -18,24 +20,14 @@ function Perfil() {
 
 	return (
 		<div className="flex justify-center mx-4">
-			<div className="container mx-auto my-4 rounded-2xl overflow-hidden">
-				<img
-					className="w-full h-72 object-cover border-b-8 border-white"
-					src="https://i.imgur.com/ZZFAmzo.jpg"
-					alt="Capa do Perfil"
-				/>
-
-				<img
-					className="rounded-full w-56 mx-auto mt-[-8rem] border-8 border-white relative z-10"
-					src={usuario.foto}
-					alt={`Foto de perfil de ${usuario.nome}`}
-				/>
-
+			<div className=" w-1/2 my-4 rounded-2xl overflow-hidden">
+				
 				<div
-					className="relative mt-[-6rem] h-72 flex flex-col 
-                    bg-sky-500 text-white text-2xl items-center justify-center"
+					className=" mt-6 h-50 flex flex-col 
+                    bg-black/60 text-white text-2xl items-center justify-center gap-4"
 				>
-					<p>Nome: {usuario.nome} </p>
+<FontAwesomeIcon icon={faUser} className="text-white text-4xl" />
+					<p className="gap-">Nome: {usuario.nome} </p>
 					<p>Email: {usuario.usuario}</p>
 				</div>
 			</div>

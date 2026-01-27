@@ -9,13 +9,6 @@ function CardPostagem({ postagem }: CardPostagensProps) {
   return (
     <div className="border border-slate-300 rounded-lg shadow p-6 flex flex-col gap-6 bg-white">
 
-      {/* Texto principal (testimonial) */}
-      <div className="text-center">
-        <p className="text-lg italic text-slate-700">
-          “{postagem.texto}”
-        </p>
-      </div>
-
       {/* Avatar + Info */}
       <div className="flex items-center gap-4">
         <div className="h-14 w-14 rounded-full overflow-hidden border">
@@ -35,6 +28,15 @@ function CardPostagem({ postagem }: CardPostagensProps) {
           </p>
         </div>
       </div>
+
+      {/* Texto principal (testimonial) */}
+      <div className="text-center">
+        <p className="text-lg italic text-slate-700">
+          “{postagem.texto}”
+        </p>
+      </div>
+
+      
 
       {/* Data */}
       <p className="text-xs text-slate-400">
